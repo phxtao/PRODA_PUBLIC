@@ -28,7 +28,7 @@ import random
 is_server = 0
 model_name = 'cesm2_clm5_cen_vr_v2'
 time_domain = 'whole_time' # 'whole_time', 'before_1985', 'after_1985', 'random_half_1', 'random_half_2'
-cross_valid_num = 10
+cross_valid_num = 1
 
 nn_training_name = 'exp_pc_cesm2_23' + '_cross_valid_' + str(cross_valid_num)
 
@@ -180,7 +180,7 @@ for ivar in range(len(var4nn)):
 	valid_loc = valid_loc[(np.isnan(currentdata_x[:, ivar]) == False)]
 	currentdata_x = currentdata_x[(np.isnan(currentdata_x[:, ivar]) == False), :]
 
-test_loc_cross_valid = loadmat(data_dir_input + 'data4nn/cross_valid_test_loc_' + model_name + '_' + time_domain + '.mat')
+test_loc_cross_valid = loadmat(data_dir_input + 'data4nn/cross_valid_test_loc_auto_corr_' + model_name + '_' + time_domain + '.mat')
 test_loc_cross_valid = df(test_loc_cross_valid['test_loc'])
 
 test_loc = np.asarray(test_loc_cross_valid.iloc[:, cross_valid_num-1])
@@ -266,7 +266,7 @@ model.summary()
 # early stopping
 early_stop = EarlyStopping(monitor = 'val_loss', mode = 'min', verbose = 2, patience = early_stop_patience)
 
-model_check = ModelCheckpoint(data_dir_output + 'neural_networking/trained_model_' + model_name + '_' + time_domain + '_' + nn_training_name + '.h5', monitor = 'val_loss', mode = 'min', verbose = 2, save_best_only = True)
+model_check = ModelCheckpoint(data_dir_output + 'neural_networking/trained_model_auto_corr_' + model_name + '_' + time_domain + '_' + nn_training_name + '.h5', monitor = 'val_loss', mode = 'min', verbose = 2, save_best_only = True)
 
 ########################################################
 # NN Operation
@@ -274,7 +274,7 @@ model_check = ModelCheckpoint(data_dir_output + 'neural_networking/trained_model
 # fit network
 history = model.fit(x = train_x, y = train_y, epochs = nn_epochs, batch_size = nn_batch_size, validation_split = nn_split_ratio, verbose = 2, callbacks=[early_stop, model_check])
 # load best model
-best_model = load_model(data_dir_output + 'neural_networking/trained_model_' + model_name + '_' + time_domain + '_' + nn_training_name + '.h5', custom_objects={'joint_loss': joint_loss})
+best_model = load_model(data_dir_output + 'neural_networking/trained_model_auto_corr_' + model_name + '_' + time_domain + '_' + nn_training_name + '.h5', custom_objects={'joint_loss': joint_loss})
 
 # fig = plt.figure()    
 
@@ -285,11 +285,11 @@ plt.plot(history.history['val_loss'])
 plt.yscale('log')
 plt.xscale('log')
 plt.legend(['train', 'validation'], loc = 'upper right')
-plt.savefig(data_dir_output + 'neural_networking/loss_' + model_name + '_' + time_domain + '_' + nn_training_name + '.pdf')
+plt.savefig(data_dir_output + 'neural_networking/loss_auto_corr_' + model_name + '_' + time_domain + '_' + nn_training_name + '.pdf')
 plt.close()
 
 # reload_model = tf.keras.models.load_model('/Users/phoenix/Google_Drive/Tsinghua_Luo/Projects/DADL/fao_gsp/trained_model_test11.h5', custom_objects={'joint_loss': joint_loss})
-# model.save(data_dir_output + 'neural_networking/trained_model_' + model_name + '_' + time_domain + '_' + nn_training_name + '.h5')
+# model.save(data_dir_output + 'neural_networking/trained_model_auto_corr_' + model_name + '_' + time_domain + '_' + nn_training_name + '.h5')
 
 ########################################################
 # Visualization of NN Results
@@ -311,7 +311,7 @@ for ipara in range(len(para_names)):
 	plt.yticks(fontsize = 5)
 	plt.title(para_names[ipara])
 
-plt.savefig(data_dir_output + 'neural_networking/para_' + model_name + '_' + time_domain + '_' + nn_training_name + '.pdf')
+plt.savefig(data_dir_output + 'neural_networking/para_auto_corr_' + model_name + '_' + time_domain + '_' + nn_training_name + '.pdf')
 plt.close()
 # plt.show()
 print(corr_para)
@@ -320,6 +320,6 @@ print(corr_para)
 # Output
 ######################################################
 nn_site_loc =  np.asarray(valid_loc)[test_loc]
-np.savetxt(data_dir_output + 'neural_networking/nn_para_result_' + model_name + '_' + time_domain + '_' + nn_training_name + '.csv', nn_predict, delimiter = ',')
-np.savetxt(data_dir_output + 'neural_networking/nn_site_loc_' + model_name + '_' + time_domain + '_' + nn_training_name + '.csv', nn_site_loc, delimiter = ',')
+np.savetxt(data_dir_output + 'neural_networking/nn_para_result_auto_corr_' + model_name + '_' + time_domain + '_' + nn_training_name + '.csv', nn_predict, delimiter = ',')
+np.savetxt(data_dir_output + 'neural_networking/nn_site_loc_auto_corr_' + model_name + '_' + time_domain + '_' + nn_training_name + '.csv', nn_site_loc, delimiter = ',')
 
