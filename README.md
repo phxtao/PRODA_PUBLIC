@@ -1,5 +1,6 @@
 # PRODA_PUBLIC
-Publicly realised version of PRODA and its applications
+
+Code and figures for the manuscript Microbial carbon use efficiency promotes global soil carbon storage
 
 Author: Feng Tao
 
