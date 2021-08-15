@@ -142,7 +142,7 @@ p_importance =
   # change the legend properties
   theme(legend.position = 'none') +
   # add title
-  labs(x = 'Global SOC Stock (Pg C)', y = expression(paste('Explained Variation (%)'), sep = '')) +
+  labs(x = 'Global SOC stock (Pg C)', y = expression(paste('Explained spatial variation (%)'), sep = '')) +
   # modify the position of title
   # modify the font size
   theme(plot.margin = unit(c(0.2, 0.2, 0.2, 0.2), 'inch')) +
@@ -248,7 +248,7 @@ for (iprocess in 1:length(process_list)) {
 
 
 color_scheme = c('#E69F00', '#56B4E9', '#009E73', '#F0E442', '#0072B2', '#D55E00')
-line_label = c('Microbial CUE', 'Environmental Modifers', 'Plant Carbon Inputs', 'Baseline Decomposition', 'Vertical Transport', 'Carbon Input Allocation')
+line_label = c('Microbial CUE', 'Environmental modifers', 'Plant carbon inputs', 'Baseline decomposition', 'Vertical transport', 'Carbon input allocation')
 
 p_curve = 
   ggplot(data = marginal_change_summary) +
@@ -271,7 +271,7 @@ p_curve =
   theme(legend.text = element_text(size = 30), legend.title = element_text(size = 30))  +
   theme(legend.key = element_rect(color = NA, fill = NA), legend.key.size = unit(0.8, 'inch')) +
   # add title
-  labs(y = 'Global SOC Stock (Pg C)', x = paste('Proportional Changes of Mechanisms (%)')) +
+  labs(y = 'Global SOC stock (Pg C)', x = paste('Proportional changes of mechanisms (%)')) +
   # modify the position of title
   # modify the font sizea
   theme(plot.margin = unit(c(0.2, 0.2, 0.2, 0.2), 'inch')) +

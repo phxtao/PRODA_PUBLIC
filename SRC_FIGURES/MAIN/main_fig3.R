@@ -237,11 +237,11 @@ process_axis_label = c('Microbial CUE',
                        'Environmental Modifer', 
                        expression(paste('Input Carbon (g C yr'^'-1', ')', sep = '')))
 process_name =  c('Microbial CUE', 
-                  'Carbon Input Allocation', 
-                  'Baseline Decomposition', 
-                  'Vertical Transport Rate',
-                  'Environmental Modifer', 
-                  'Plant Carbon Inputs')
+                  'Carbon input allocation', 
+                  'Baseline decomposition', 
+                  'Vertical transport rate',
+                  'Environmental modifer', 
+                  'Plant carbon inputs')
 process_unit = c('unitless',
                  'unitless', 
                  expression(paste('yr'^'-1', sep = '')),
@@ -315,7 +315,7 @@ p_soc =
   guides(fill = guide_colorbar(direction = 'vertical', barwidth = 2.5, barheight = 14, title.position = 'top', title.hjust = 0, label.hjust = 0, frame.linewidth = 0), reverse = FALSE) +
   theme(legend.text = element_text(size = 35, ), legend.title = element_text(size = 40)) +
   # add title
-  labs(title = 'SOC Stock', x = '', y = '') + 
+  labs(title = 'SOC stock', x = '', y = '') + 
   # modify the position of title
   theme(plot.title = element_text(hjust = 0.5, vjust = -1, size = 50)) + 
   # modify the font size
@@ -372,7 +372,7 @@ p_tau =
   guides(fill = guide_colorbar(direction = 'vertical', barwidth = 2.5, barheight = 14, title.position = 'top', title.hjust = 0, label.hjust = 0, frame.linewidth = 0), reverse = FALSE) +
   theme(legend.text = element_text(size = 35, ), legend.title = element_text(size = 40)) +
   # add title
-  labs(title = 'SOC Residence Time', x = '', y = '') + 
+  labs(title = 'SOC residence time', x = '', y = '') + 
   # modify the position of title
   theme(plot.title = element_text(hjust = 0.5, vjust = -1, size = 50)) + 
   # modify the font size
@@ -505,7 +505,7 @@ box_4 = box_4 +
 
 
 
-jpeg(paste('./Ensemble/main_fig2.jpeg', sep = ''), width = 35, height = 25, units = 'in', res = 300)
+jpeg(paste('./Ensemble/main_fig3.jpeg', sep = ''), width = 35, height = 25, units = 'in', res = 300)
 plot_grid(p_soc, box_soc, p_tau, box_tau, 
           p1, box_1, p6, box_6, 
           p2, box_2, p3, box_3, 

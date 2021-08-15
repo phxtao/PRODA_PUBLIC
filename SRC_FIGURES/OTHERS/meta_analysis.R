@@ -138,7 +138,7 @@ jpeg(paste('./Ensemble/meta_site_loc.jpeg', sep = ''), width = 10, height = 5, u
 
 ggplot() +
   geom_point(data = current_data, aes(x = lon, y = lat, size = num), color = 'red3', alpha = 0.7, na.rm = TRUE) +
-  scale_size_continuous(name = 'Record Number', breaks = c(1, 4, 8)) + 
+  scale_size_continuous(name = 'Data Sets Number', breaks = c(1, 4, 8)) + 
   geom_polygon(data = Map.Using, aes(x = long, y = lat, group = group), fill = NA, color = 'black', size = 0.5) +
   # change the background to black and white
   theme_bw() +
